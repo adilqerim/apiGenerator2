@@ -14,17 +14,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.kerimov.adee.apigenerator.adapters.PostsAdapter;
 import com.kerimov.adee.apigenerator.fragmets.AlbumFragment;
 import com.kerimov.adee.apigenerator.fragmets.PostsFragment;
 import com.kerimov.adee.apigenerator.model.Post;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PostsFragment()).commit();
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -55,6 +54,5 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
-
 
 }
