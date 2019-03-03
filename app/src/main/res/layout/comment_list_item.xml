@@ -8,10 +8,15 @@
     android:orientation="vertical"
     android:padding="16dp">
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="TITLE"/>
+    <TextView
+        android:id="@+id/tv_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="MAIL"/>
     <TextView
         android:id="@+id/tv_text"
         android:layout_width="wrap_content"

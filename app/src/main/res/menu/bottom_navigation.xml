@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/nav_posts"
+    <item
+        android:id="@+id/nav_post"
         android:icon="@drawable/ic_announcement_black_24dp"
-        android:title="post"/>
-
-    <item android:id="@+id/nav_album"
+        android:title="Post"/>
+    <item
+        android:id="@+id/nav_album"
         android:icon="@drawable/ic_image_black_24dp"
-        android:title="album"/>
+        android:title="Album"/>
 </menu>
