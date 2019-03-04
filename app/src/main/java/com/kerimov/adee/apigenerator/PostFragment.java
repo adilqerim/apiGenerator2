@@ -1,6 +1,7 @@
 package com.kerimov.adee.apigenerator;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -59,7 +60,7 @@ public class PostFragment extends Fragment {
 
                 List<Post> mPostList = response.body();
 
-                mAdapter = new PostAdapter(view.getContext(),mPostList);
+                mAdapter = new PostAdapter(view.getContext(),mPostList,randomArray);
 
                 recyclerView.setAdapter(mAdapter);
             }
@@ -77,7 +78,7 @@ public class PostFragment extends Fragment {
 
     public int[] getRandomArray(int ten, int diapason){
         int[] array = new int[ten];
-        for (int i = 0; i < ten; i++){
+        for (int i = 0; i < 10; i++){
             array[i] = (int)(Math.random() * diapason);
         }
         return array;

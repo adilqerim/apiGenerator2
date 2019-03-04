@@ -19,4 +19,14 @@ public interface JsonPlaceHolderApi {
 
     @GET("/posts/{id}")
     Call<Post> getPostById(@Path("id") int id);
+
+    @GET("/albums/")
+    Call<List<Album>> getAlbum(@Query("id") int[] id);
+
+    @GET("/photos/")
+    Call<List<Photo>> getPhoto(@Query("id") int[] id);
+
+    @GET("weather/")
+    Call<Weather> getWeather(@Query("id") String id,
+                                    @Query("appid") String APPID);
 }

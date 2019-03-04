@@ -1,6 +1,8 @@
 package com.kerimov.adee.apigenerator;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -24,14 +26,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     List<Post> mPosts;
     private static final String TAG = "PostAdapter";
     Context mContext;
+    Bundle mBundle;
+    int[] randomArray;
 
-
-
-
-
-    public PostAdapter(Context context,List<Post> posts) {
+    public PostAdapter(Context context,List<Post> posts,int[] randomArray) {
         this.mContext = context;
         mPosts = posts;
+        this.randomArray = randomArray;
     }
 
     @NonNull
@@ -45,26 +46,31 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PostViewHolder postViewHolder, int i) {
+    public void onBindViewHolder(@NonNull PostViewHolder postViewHolder, @SuppressLint("RecyclerView") final int i) {
         postViewHolder.tvTitle.setText(mPosts.get(i).getTitle());
         postViewHolder.tvText.setText(mPosts.get(i).getText());
-        final Bundle mBundle = new Bundle();
+
+        mBundle = new Bundle();
         mBundle.putInt("PostPosition",i);
 
         postViewHolder.parent_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "onClick: called");
+                String position = "Position: " + String.valueOf(i);
 
-//                Toast.makeText(mContext,"hey",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,position,Toast.LENGTH_SHORT).show();
 
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                Fragment myFragment = new CommentFragment();
-                myFragment.setArguments(mBundle);
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment)
-                        .addToBackStack(null)
-                        .commit();
-
+//                Fragment myFragment = new CommentFragment();
+//                myFragment.setArguments(mBundle);
+//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment)
+//                        .addToBackStack(null)
+//                        .commit();
+                Intent intent = new Intent(activity, CommentActivity.class);
+                intent.putExtra("position", String.valueOf(i));
+                intent.putExtra("randomArray", randomArray);
+                activity.startActivity(intent);
             }
         });
     }
@@ -80,6 +86,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         LinearLayout parent_layout;
             PostViewHolder(@NonNull View itemView) {
             super(itemView);
+
             tvTitle = itemView.findViewById(R.id.tv_title);
             tvText = itemView.findViewById(R.id.tv_text);
             parent_layout = itemView.findViewById(R.id.parent_layout);

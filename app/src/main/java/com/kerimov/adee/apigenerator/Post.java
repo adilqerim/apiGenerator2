@@ -1,6 +1,7 @@
 package com.kerimov.adee.apigenerator;
 
 import com.google.gson.annotations.SerializedName;
+import com.squareup.picasso.Picasso;
 
 public class Post {
     @SerializedName("title")
