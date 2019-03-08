@@ -66,8 +66,10 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
 
         TextView tvTitle;
         LinearLayout parent_layout;
+
         AlbumViewHolder(@NonNull View itemView) {
             super(itemView);
+
             tvTitle = itemView.findViewById(R.id.tv_title_album);
             parent_layout = itemView.findViewById(R.id.parent_layout_album);
 

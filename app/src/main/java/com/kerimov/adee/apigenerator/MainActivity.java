@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 public class MainActivity extends AppCompatActivity {
 
 
-
+    Fragment selectedFragment = null;
 
 
 
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    Fragment selectedFragment = null;
+
 
                     switch (menuItem.getItemId()) {
                         case R.id.nav_post:

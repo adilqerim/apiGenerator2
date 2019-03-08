@@ -32,7 +32,7 @@ public class PhotoFragment extends Fragment{
     private PhotoAdapter mPhotoAdapter;
     private RecyclerView recyclerView;
     private List<Photo> mPhotoList;
-    private ImageView mImageView;
+//    private ImageView mImageView;
 
 
     public PhotoFragment() {
@@ -47,7 +47,7 @@ public class PhotoFragment extends Fragment{
         final View view = inflater.inflate(R.layout.fragment_photo, container, false);
 
         recyclerView =  view.findViewById(R.id.photo_recycle_view);
-        mImageView = view.findViewById(R.id.image_view);
+//        mImageView = view.findViewById(R.id.image_view);
 
         Call<List<Photo>> call = NetworkService
                 .getInstance()

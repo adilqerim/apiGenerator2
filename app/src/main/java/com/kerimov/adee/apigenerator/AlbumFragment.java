@@ -27,7 +27,7 @@ import retrofit2.Response;
 public class AlbumFragment extends Fragment{
 
     private static final String TAG = "MainActivity";
-    private AlbumAdapter mAlbumAdapter;
+    private RecyclerView.Adapter mAlbumAdapter;
     private RecyclerView recyclerView;
     private List<Album> mAlbumList;
 

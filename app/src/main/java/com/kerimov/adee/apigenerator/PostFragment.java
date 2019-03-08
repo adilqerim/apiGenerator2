@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -26,6 +27,14 @@ public class PostFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private List<Post> mPostList;
+    private List<Weather> mWeatherList;
+    private int BishkekWeatherId = 1528334;
+    private int OshWeahterId = 1527534;
+    private int CholponAtaWeahterId = 1528512;
+    private int NarynWeatherId = 1527592;
+    private int[] IdArray = {BishkekWeatherId, OshWeahterId, CholponAtaWeahterId, NarynWeatherId};
+
 
     final int[] randomArray = getRandomArray(10, 100);
 
@@ -48,6 +57,18 @@ public class PostFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
 
+        final TextView randomTv = view.findViewById(R.id.tv_random);
+
+
+
+////        int[] random = getRandomArrayWeather(IdArray);
+//
+//        String randomText = random[0] + "\n";
+//        randomText += random[1] + "\n";
+//        randomText += random[2] + "\n";
+//        randomText += random[3] + "\n";
+//
+//        randomTv.setText(randomText);
 
 
         Call<List<Post>> call = NetworkService
@@ -58,11 +79,8 @@ public class PostFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
 
-                List<Post> mPostList = response.body();
+                mPostList = response.body();
 
-                mAdapter = new PostAdapter(view.getContext(),mPostList,randomArray);
-
-                recyclerView.setAdapter(mAdapter);
             }
 
             @Override
@@ -71,6 +89,25 @@ public class PostFragment extends Fragment {
             }
         });
 
+        Call<List<Weather>> callWeather = NetworkService
+                .getInstance()
+                .getJSONApiWeather()
+                .getWeather(IdArray);
+        callWeather.enqueue(new Callback<List<Weather>>() {
+            @Override
+            public void onResponse(Call<List<Weather>> call, Response<List<Weather>> response) {
+                mWeatherList = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<Weather>> call, Throwable t) {
+
+            }
+        });
+
+        mAdapter = new PostAdapter(view.getContext(),mPostList, mWeatherList, randomArray);
+
+        recyclerView.setAdapter(mAdapter);
 
         return view;
     }
@@ -83,5 +120,13 @@ public class PostFragment extends Fragment {
         }
         return array;
     }
+
+//    public int[] getRandomArrayWeather(int[] idRandomArray){
+//        int[] array = new int[4];
+//        for (int i = 0; i < 4; i++){
+//            array[i] = idRandomArray[(int) Math.floor(Math.random() * idRandomArray.length)];
+//        }
+//        return array;
+//    }
 
 }
