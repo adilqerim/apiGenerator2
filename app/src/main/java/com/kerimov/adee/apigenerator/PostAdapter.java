@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,12 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     List<Post> mPosts;
-    List<Weather> mWeathers;
+    List<Weather> mWeathersList;
     private static final String TAG = "PostAdapter";
     Context mContext;
     Bundle mBundle;
@@ -32,18 +30,21 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_HEADER_POST = 0;
     private static final int TYPE_HEADER_WEATHER = 1;
 
-    public PostAdapter(Context context,List<Post> posts,List<Weather> weathers, int[] randomArray) {
+    public PostAdapter(Context context,List<Post> posts,List<Weather> weathers) {
         this.mContext = context;
         mPosts = posts;
-        mWeathers = weathers;
+        mWeathersList = weathers;
+        Collections.shuffle(mPosts);
+        Collections.shuffle(mWeathersList);
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemViewType(int position) {
         if (position == TYPE_HEADER_POST) {
-            return TYPE_HEADER_POST;
-        } else {
             return TYPE_HEADER_WEATHER;
+        } else {
+            return TYPE_HEADER_POST;
         }
     }
     @NonNull
@@ -90,7 +91,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
          else {
             WeatherViewHolder weatherViewHolder = (WeatherViewHolder) viewHolder;
-            weatherViewHolder.tvNameWeather.setText(mWeathers.get(i).getName());
+            weatherViewHolder.tvNameWeather.setText(mWeathersList.get(i).getName());
         }
 
 
@@ -99,7 +100,7 @@ public class PostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mPosts.size() + mWeathers.size();
+        return mPosts.size() + mWeathersList.size();
     }
 
     static class PostsViewHolder extends RecyclerView.ViewHolder {

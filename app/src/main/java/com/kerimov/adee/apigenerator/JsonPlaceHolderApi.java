@@ -27,5 +27,8 @@ public interface JsonPlaceHolderApi {
     Call<List<Photo>> getPhoto(@Query("id") int[] id);
 
     @GET("weather?appid=985601627df7745a7f4a0a1d8b7b4f4b")
-    Call<List<Weather>> getWeather(@Query("id") int[] id);
+    Call<Weather> getWeather(@Query("id") int id);
+
+    @GET("weather?appid=985601627df7745a7f4a0a1d8b7b4f4b")
+    Call<List<Weather>> getWeatherList(@Query("id") int[] id);
 }
